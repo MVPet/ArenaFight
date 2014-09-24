@@ -2,7 +2,7 @@
 #define _GAMESTATE
 
 #include "State.hpp"
-#include "World.hpp"
+#include "Battle.hpp"
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -19,7 +19,7 @@ class GameState : public State
 
 
 	private:
-		//World				mWorld;
+		Battle				mBattle;
 };
 
 #endif // GameState.hpp

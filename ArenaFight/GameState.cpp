@@ -3,20 +3,15 @@
 
 GameState::GameState(StateStack& stack, Context context)
 : State(stack, context)
-//, mWorld(*context.window)
-{
-}
+, mBattle(*context.window)
+{}
 
 void GameState::draw()
-{
-	//mWorld.draw();
-}
+{ mBattle.draw(); }
 
 bool GameState::update(sf::Time dt)
 {
-	//mWorld.update(dt);
-
-	//mPlayer.handleRealtimeInput(commands);
+	mBattle.update(dt);
 
 	return true;
 }
@@ -24,7 +19,7 @@ bool GameState::update(sf::Time dt)
 bool GameState::handleEvent(const sf::Event& event)
 {
 	// Game input handling
-	//mPlayer.handleEvent(event, commands);
+	mBattle.handleEvent(event);
 
 	// Escape pressed, trigger the pause screen
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
