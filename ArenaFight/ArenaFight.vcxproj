@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Battle.cpp" />
+    <ClCompile Include="CharacterDataTables.cpp" />
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -93,14 +94,19 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageDataTables.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Battle.hpp" />
+    <ClInclude Include="BattleData.hpp" />
+    <ClInclude Include="CharacterDataTables.hpp" />
+    <ClInclude Include="StageDataTables.hpp" />
     <ClInclude Include="Fighter.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="MenuState.hpp" />
@@ -112,6 +118,7 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateIdentifiers.hpp" />
     <ClInclude Include="StateStack.hpp" />
+    <ClInclude Include="Terrain.hpp" />
     <ClInclude Include="TitleState.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>

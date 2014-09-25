@@ -1,10 +1,15 @@
 #include "GameState.hpp"
+#include "BattleData.hpp"
 
 
 GameState::GameState(StateStack& stack, Context context)
 : State(stack, context)
 , mBattle(*context.window)
-{}
+{
+	// Temporary until I create character and stage select
+	selectedFighters[0] = Fighter::Kenshiro;
+	selectedStage = Stage::Training;
+}
 
 void GameState::draw()
 { mBattle.draw(); }

@@ -1,38 +1,31 @@
 #include "Battle.hpp"
+#include "BattleData.hpp"
 
 #include <SFML\Graphics\RenderWindow.hpp>
 
-#include <algorithm>
-#include <cassert>
-
 Battle::Battle(sf::RenderWindow& window)
 	: mWindow(window)
-	, mPlayer()
-	, mStage()
+	//, mPlayer(0)
+	, mStage(selectedStage)
 {
-	buildBattle();
 	mWorldView = mWindow.getDefaultView();
 	mWorldBounds = mWindow.getDefaultView().getSize();
 }
 
 void Battle::update(sf::Time dt)
 {
-	mPlayer.handleRealtimeInput();
+	mStage.update(dt);
+	//mPlayer.handleRealtimeInput();
 }
 
 void Battle::handleEvent(sf::Event event)
 {
-	mPlayer.handleEvent(event);
+	//mPlayer.handleEvent(event);
 }
 
 void Battle::draw()
-{}
-
-void Battle::buildBattle()
 {
-	loadPlayers();
+	mStage.draw(mWindow);
+	//mPlayer.draw(mWindow);
 }
-
-void Battle::loadPlayers()
-{}
 

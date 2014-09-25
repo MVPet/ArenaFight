@@ -8,6 +8,11 @@
 #include <map>
 #include <functional>
 
+namespace sf
+{
+	class RenderWindow;
+}
+
 class Player
 {
 public:
@@ -15,7 +20,11 @@ public:
 	{ MoveLeft, MoveRight, MoveUp, MoveDown, ActionCount };
 
 public:
-			Player();
+			Player(int playerNo);
+
+	void	update(sf::Time dt);
+	void	load();
+	void	draw(sf::RenderWindow& window) const;
 
 	void	handleEvent(const sf::Event& event);
 	void	handleRealtimeInput();
@@ -28,7 +37,9 @@ private:
 	static bool	isRealtimeAction(Action action);
 
 private:
-	Fighter											character;
+	int												mPlayerNo;
+
+	//Fighter											mCharacter;
 	std::map<sf::Keyboard::Key, Action>				mKeyBinding;
 	std::map<Action, std::function<void()>>			mActionBinding;
 };

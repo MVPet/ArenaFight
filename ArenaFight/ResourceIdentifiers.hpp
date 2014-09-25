@@ -10,7 +10,7 @@ namespace sf
 namespace Textures
 {
 	enum ID
-	{ TitleScreen };
+	{ TitleScreen, Background, Platform, Ground, Stand };
 }
 
 namespace Fonts

@@ -1,12 +1,30 @@
 #include "Player.hpp"
+#include "BattleData.hpp"
 
-Player::Player()
+#include <SFML\Graphics\RenderWindow.hpp>
+
+Player::Player(int playerNo)
+	: mPlayerNo(playerNo)
+	//, mCharacter(selectedFighters[mPlayerNo])
 {
 	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
 	mKeyBinding[sf::Keyboard::Right] = MoveRight;
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
 	mKeyBinding[sf::Keyboard::Down] = MoveDown;
+
+	load();
 }
+
+void Player::update(sf::Time dt)
+{}
+
+void Player::load()
+{
+	//mCharacter.load();
+}
+
+void Player::draw(sf::RenderWindow& window) const
+{}
 
 void Player::handleEvent(const sf::Event& event)
 {

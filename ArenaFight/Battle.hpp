@@ -24,10 +24,6 @@ public:
 	void		draw();
 
 private:
-	void		buildBattle();
-	void		loadPlayers();
-
-private:
 	sf::RenderWindow&	mWindow;
 	sf::View			mWorldView;
 
@@ -35,7 +31,7 @@ private:
 	sf::Vector2f		mSpawnPosition;
 
 	Stage				mStage;
-	Player				mPlayer;
+	//Player				mPlayer;
 };
 
 #endif // Battle.hpp
