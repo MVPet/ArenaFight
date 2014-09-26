@@ -52,6 +52,9 @@ void Stage::draw(sf::RenderWindow& window) const
 			t.draw(window);
 }
 
+std::vector<Terrain> Stage::getTerrain() const
+{ return mTerrain; }
+
 std::string Stage::typeToString()
 {
 	switch (mType)

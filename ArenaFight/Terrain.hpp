@@ -17,16 +17,18 @@ public:
 	{ Platform, Ground };
 
 public:
-			Terrain(Type id, sf::Vector2f position, sf::Texture* texture);
+					Terrain(Type id, sf::Vector2f position, sf::Texture* texture);
 
-	void	update(sf::Time dt);
-	void	draw(sf::RenderWindow& window) const;
+	void			update(sf::Time dt);
+	void			draw(sf::RenderWindow& window) const;
+
+	sf::FloatRect		getBoundBox() const;
 
 private:
 	Type			mType;
 	sf::Texture*	mTexture;
 	sf::Sprite		mSprite;
-	sf::FloatRect	mBoundBox;
+	sf::FloatRect		mBoundBox;
 };
 
 #endif // Terrian.hpp

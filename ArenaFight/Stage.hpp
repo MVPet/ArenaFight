@@ -22,12 +22,14 @@ public:
 	enum Type
 	{ Training, TypeCount };
 
-public:
-			Stage(Type id);
+public:	
+							Stage(Type id);
 
-	void	update(sf::Time dt);
-	void	load();
-	void	draw(sf::RenderWindow& window) const;
+	void					update(sf::Time dt);
+	void					load();
+	void					draw(sf::RenderWindow& window) const;
+
+	std::vector<Terrain>	getTerrain() const;
 
 private:
 	std::string typeToString();

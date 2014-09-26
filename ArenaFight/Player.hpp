@@ -3,6 +3,9 @@
 
 #include "Fighter.hpp"
 
+#include "ResourceHolder.hpp"
+#include "ResourceIdentifiers.hpp"
+
 #include <SFML/Window/Event.hpp>
 
 #include <map>
@@ -17,31 +20,39 @@ class Player
 {
 public:
 	enum Action
-	{ MoveLeft, MoveRight, MoveUp, MoveDown, ActionCount };
+	{ MoveLeft, MoveRight, Jump, Guard, ActionCount };
 
 public:
-			Player(int playerNo);
+						Player(int playerNo, sf::Vector2f position);
 
-	void	update(sf::Time dt);
-	void	load();
-	void	draw(sf::RenderWindow& window) const;
+	void				update(sf::Time dt);
+	void				draw(sf::RenderWindow& window) const;
 
-	void	handleEvent(const sf::Event& event);
-	void	handleRealtimeInput();
-
+	void				handleEvent(const sf::Event& event);
+	void				handleRealtimeInput();
+		
 	void				assignKey(Action action, sf::Keyboard::Key key);
 	sf::Keyboard::Key	getAssignedKey(Action action) const;
 
+	void				setVelocity(float x, float y);
+	sf::Vector2f		getVelocity() const;
+
+	void				setPosition(float x, float y);
+	sf::Vector2f		getPosition() const;
+
+	void				setGrounded(bool grounded);
+
+	sf::FloatRect		getGroundBox() const;
+
 private:	
-	void		initializeActions();
 	static bool	isRealtimeAction(Action action);
 
 private:
 	int												mPlayerNo;
 
-	//Fighter											mCharacter;
+	Fighter											mCharacter;
+	sf::Vector2f									mPosition;
 	std::map<sf::Keyboard::Key, Action>				mKeyBinding;
-	std::map<Action, std::function<void()>>			mActionBinding;
 };
 
 #endif // Player.hpp

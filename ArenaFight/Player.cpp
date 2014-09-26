@@ -3,28 +3,25 @@
 
 #include <SFML\Graphics\RenderWindow.hpp>
 
-Player::Player(int playerNo)
+Player::Player(int playerNo, sf::Vector2f position)
 	: mPlayerNo(playerNo)
-	//, mCharacter(selectedFighters[mPlayerNo])
+	, mCharacter(selectedFighters[mPlayerNo], position)
 {
 	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
 	mKeyBinding[sf::Keyboard::Right] = MoveRight;
-	mKeyBinding[sf::Keyboard::Up] = MoveUp;
-	mKeyBinding[sf::Keyboard::Down] = MoveDown;
-
-	load();
+	//mKeyBinding[sf::Keyboard::Up] = MoveUp;
+	mKeyBinding[sf::Keyboard::Down] = Guard;
 }
 
 void Player::update(sf::Time dt)
-{}
-
-void Player::load()
 {
-	//mCharacter.load();
+	mCharacter.update(dt);
 }
 
 void Player::draw(sf::RenderWindow& window) const
-{}
+{
+	mCharacter.draw(window);
+}
 
 void Player::handleEvent(const sf::Event& event)
 {
@@ -32,7 +29,7 @@ void Player::handleEvent(const sf::Event& event)
 	{
 		auto found = mKeyBinding.find(event.key.code);
 		if(found != mKeyBinding.end() && !isRealtimeAction(found->second))
-			mActionBinding[found->second]();
+		{}
 	}
 }
 
@@ -40,8 +37,19 @@ void Player::handleRealtimeInput()
 {
 	for(auto pair : mKeyBinding)
 	{
-		if(sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
-			mActionBinding[pair.second]();
+		if(sf::Keyboard::isKeyPressed(pair.first))
+		{
+			switch (pair.second)
+			{
+			case MoveLeft:
+				mCharacter.MoveLeft();
+				break;
+
+			case MoveRight:
+				mCharacter.MoveRight();
+				break;
+			}
+		}
 	}
 }
 
@@ -67,8 +75,23 @@ sf::Keyboard::Key Player::getAssignedKey(Action action) const
 	return sf::Keyboard::Unknown;
 }
 
-void Player::initializeActions()
-{}
+void Player::setPosition(float x, float y)
+{ mCharacter.setPosition(x, y); }
+
+sf::Vector2f Player::getPosition() const
+{ return mCharacter.getPosition(); }
+
+void Player::setVelocity(float x, float y)
+{ mCharacter.setVelocity(x, y); }
+
+sf::Vector2f Player::getVelocity() const
+{ return mCharacter.getVelocity(); }
+
+void Player::setGrounded(bool value)
+{ mCharacter.setGrounded(value); }
+
+sf::FloatRect Player::getGroundBox() const
+{ return mCharacter.getGroundBox(); }
 
 bool Player::isRealtimeAction(Action action)
 {
@@ -76,8 +99,6 @@ bool Player::isRealtimeAction(Action action)
 	{
 		case MoveLeft:
 		case MoveRight:
-		case MoveDown:
-		case MoveUp:
 			return true;
 		default:
 			return false;

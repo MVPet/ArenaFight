@@ -1,0 +1,18 @@
+#include "AnimFrame.hpp"
+
+AnimFrame::AnimFrame(sf::IntRect hurtBox, sf::IntRect attackBox, float frameTime)
+	: mHurtBox(hurtBox)
+	, mHasAttackBox(true)
+	, mAttackBox(attackBox)
+	, mFrameTime(frameTime)
+{}
+
+AnimFrame::AnimFrame(sf::IntRect hurtBox, float frameTime)
+	: mHurtBox(hurtBox)
+	, mHasAttackBox(true)
+	, mAttackBox(sf::IntRect(5000, 5000, 5000, 5000))
+	, mFrameTime(frameTime)
+{}
+
+float AnimFrame::getFrameTime()
+{ return mFrameTime; }
