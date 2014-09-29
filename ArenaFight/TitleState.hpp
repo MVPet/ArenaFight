@@ -1,3 +1,8 @@
+/*
+* TitleState.hpp
+* Contains everything we need to run our Title Screen
+*/
+
 #ifndef _TITLESTATE
 #define _TITLESTATE
 

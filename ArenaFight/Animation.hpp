@@ -1,3 +1,9 @@
+/*
+* A sprite Animation
+* Contains one sprite and the texture rectangle dictates what square of the sheet to display
+* once the update time has been passed, move on to the next frame
+*/
+
 #ifndef _ANIMATION
 #define _ANIMATION
 
@@ -9,25 +15,23 @@ class Animation
 {
 public:
 	enum Type
-	{ Stand, Run, Guard, NLight, DLight, SLight, ULight, AnimationCount };
+	{ 
+		Stand, Run, Falling, Landing, 
+		Guard, NLight, DLight, SLight, ULight
+	};
 
 public:
 					Animation();
 					Animation(sf::Texture* texture, Type type, std::vector<AnimFrame> frameData, bool loop);
 
-	void			update(sf::Time dt, sf::Vector2f position);
+	void			update(sf::Time dt, sf::Vector2f position, float xScale);
 	void			draw(sf::RenderWindow& window) const;
-	void			reset();
 
 	Type			getType() const;
 	bool			getIsDone() const;
 	sf::Vector2i	getFrameSize() const;
 
 	void			setScale(float x, float y);
-
-private:
-	void			load(std::string charName);
-	std::string		typeToString();
 
 private:
 	Type					mType;

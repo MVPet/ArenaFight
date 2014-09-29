@@ -1,3 +1,8 @@
+/*
+* Terrain.hpp
+* All the data we need for Terrain (Platforms, Ground, etc.)
+*/
+
 #ifndef _TERRAIN
 #define _TERRAIN
 

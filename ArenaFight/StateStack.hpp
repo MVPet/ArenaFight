@@ -1,3 +1,9 @@
+/*
+* StateStack.hpp
+* What is needed for our State Stack
+* The State Stack controls what State our game is in, (Title, Screen, Main Menu, inGame, etc.)
+*/
+
 #ifndef _STATESTACK
 #define _STATESTACK
 
@@ -67,7 +73,7 @@ class StateStack : private sf::NonCopyable
 		std::map<States::ID, std::function<State::Ptr()>>	mFactories;
 };
 
-
+// Registers the state in our stack using templates
 template <typename T>
 void StateStack::registerState(States::ID stateID)
 {

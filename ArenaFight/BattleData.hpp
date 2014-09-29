@@ -1,3 +1,9 @@
+/*
+* BattleData.hpp
+* The data for our battle
+* Tells the program what characters and stage were selected
+*/
+
 #ifndef _BATTLEDATA
 #define _BATTLEDATA
 

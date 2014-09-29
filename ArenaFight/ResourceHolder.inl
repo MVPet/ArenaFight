@@ -1,4 +1,5 @@
 
+// load a Resource into the map based upon the desired Identifier
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
@@ -11,6 +12,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 	insertResource(id, std::move(resource));
 }
 
+// Same as above, but this function can take extra parameters if needed
 template <typename Resource, typename Identifier>
 template <typename Parameter>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename, const Parameter& secondParam)
@@ -24,6 +26,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 	insertResource(id, std::move(resource));
 }
 
+// Retrieve our desired resource with the given identifier
 template <typename Resource, typename Identifier>
 Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
@@ -33,6 +36,7 @@ Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 	return *found->second;
 }
 
+// Retrieve our desired const resource with the given identifier
 template <typename Resource, typename Identifier>
 const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
 {
@@ -42,6 +46,7 @@ const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
 	return *found->second;
 }
 
+// Insert a resource into the map
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::insertResource(Identifier id, std::unique_ptr<Resource> resource) 
 {

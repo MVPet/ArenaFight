@@ -1,3 +1,9 @@
+/*
+* State.hpp
+* A state is a chunk of the game that could resides on it's own
+* For example, a title screen is a state, a main menu is a state, gameplay is a state
+*/
+
 #ifndef _STATE
 #define _STATE
 

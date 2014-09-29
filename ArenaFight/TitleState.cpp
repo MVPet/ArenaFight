@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-
+// Set up our title state
 TitleState::TitleState(StateStack& stack, Context context)
 : State(stack, context)
 , mText()
@@ -19,6 +19,7 @@ TitleState::TitleState(StateStack& stack, Context context)
 	mText.setPosition(context.window->getView().getSize() / 2.f);
 }
 
+// Draw the title background and text
 void TitleState::draw()
 {
 	sf::RenderWindow& window = *getContext().window;
@@ -28,6 +29,7 @@ void TitleState::draw()
 		window.draw(mText);
 }
 
+// updtae our text so it flashes
 bool TitleState::update(sf::Time dt)
 {
 	mTextEffectTime += dt;
@@ -41,6 +43,7 @@ bool TitleState::update(sf::Time dt)
 	return true;
 }
 
+// Handle any events that could occur while on the Title Screen
 bool TitleState::handleEvent(const sf::Event& event)
 {
 	// If any key is pressed, trigger the next screen

@@ -1,8 +1,10 @@
 #include "Animation.hpp"
 
+// Default constructor
 Animation::Animation()
 {}
 
+// constructor initializes and "creates" the animation
 Animation::Animation(sf::Texture* texture, Type type, std::vector<AnimFrame> frameData, bool loop) 
 	: mTexture(texture)
 	, mFrameData(frameData)
@@ -19,9 +21,12 @@ Animation::Animation(sf::Texture* texture, Type type, std::vector<AnimFrame> fra
 	mSprite.setTexture(*mTexture);
 	mSprite.setTextureRect(sf::IntRect(0, 0, mFrameWidth, mFrameHeight));
 	mSprite.setPosition(0,0);
+
+	// Temporary fix, need to implement animation origin system
+	mSprite.setOrigin(0, mFrameHeight);
 }
 
-void Animation::update(sf::Time deltaTime, sf::Vector2f position)
+void Animation::update(sf::Time deltaTime, sf::Vector2f position, float xScale)
 {
 	mUpdateTime += deltaTime.asSeconds();
 
@@ -45,19 +50,11 @@ void Animation::update(sf::Time deltaTime, sf::Vector2f position)
 	}
 
 	mSprite.setPosition(position);
+	mSprite.setScale(xScale, 1.f);
 }
 
 void Animation::draw(sf::RenderWindow& window) const
 { window.draw(mSprite); }
-
-void Animation::reset()
-{
-	mUpdateTime = 0.0;
-	mFrameIndex = 0;
-	mIsDone = false;
-
-	mSprite.setTextureRect(sf::IntRect(mFrameIndex * mFrameWidth, 0, mFrameWidth, mFrameHeight));
-}
 
 Animation::Type Animation::getType() const
 { return mType; }
@@ -67,9 +64,6 @@ sf::Vector2i Animation::getFrameSize() const
 
 bool Animation::getIsDone() const
 { return mIsDone; }
-
-void Animation::load(std::string charName)
-{}
 
 void Animation::setScale(float x, float y)
 { mSprite.setScale(x, y); }

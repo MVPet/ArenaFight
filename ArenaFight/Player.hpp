@@ -1,3 +1,10 @@
+/*
+* Player.hpp
+* Our hero, the player
+* The Player class only handles controlling the fighter and does no logic on the fighter itself
+* Fighter Logic is done in Fighter class
+*/
+
 #ifndef _PLAYER
 #define _PLAYER
 
@@ -20,7 +27,7 @@ class Player
 {
 public:
 	enum Action
-	{ MoveLeft, MoveRight, Jump, Guard, ActionCount };
+	{ MoveLeft, MoveRight, Up, Jump, Guard, LightAttack, ActionCount };
 
 public:
 						Player(int playerNo, sf::Vector2f position);
@@ -53,6 +60,7 @@ private:
 	Fighter											mCharacter;
 	sf::Vector2f									mPosition;
 	std::map<sf::Keyboard::Key, Action>				mKeyBinding;
+	std::map<Action, bool>							mActionStatus;
 };
 
 #endif // Player.hpp

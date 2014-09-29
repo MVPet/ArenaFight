@@ -1,3 +1,9 @@
+/*
+* Stage.hpp
+* Each stage is the arena that players fight in
+* An example is Battlefield in Super Smash Bros
+*/
+
 #ifndef _STAGE
 #define _STAGE
 

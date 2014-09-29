@@ -3,26 +3,72 @@
 
 #include <SFML\Graphics\RenderWindow.hpp>
 
+// Set up our player
 Player::Player(int playerNo, sf::Vector2f position)
 	: mPlayerNo(playerNo)
 	, mCharacter(selectedFighters[mPlayerNo], position)
 {
 	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
 	mKeyBinding[sf::Keyboard::Right] = MoveRight;
-	//mKeyBinding[sf::Keyboard::Up] = MoveUp;
+	mKeyBinding[sf::Keyboard::Up] = Up;
 	mKeyBinding[sf::Keyboard::Down] = Guard;
+	mKeyBinding[sf::Keyboard::A] = LightAttack;
+
+
+	mActionStatus[MoveLeft] = false;
+	mActionStatus[MoveRight] = false;
+	mActionStatus[Guard] = false;
+	mActionStatus[Up] = false;
+	mActionStatus[LightAttack] = false;
 }
 
+// Update the player
+// Takes into account the input provided byt he user and the state the user's character is in.
 void Player::update(sf::Time dt)
 {
+	if(mCharacter.getState() != Fighter::Lag && mCharacter.getState() != Fighter::Attacking)
+	{
+		if(mActionStatus[MoveLeft])
+			mCharacter.MoveLeft();
+		else if (mActionStatus[MoveRight])
+			mCharacter.MoveRight();
+		else
+			mCharacter.setVelocity(0.f,0.f);
+
+		if(mActionStatus[Guard])
+		{
+			mCharacter.setState(Fighter::Guarding);
+			mCharacter.Guard();
+		}
+		else
+			mCharacter.setState(Fighter::None);
+
+		if(mActionStatus[LightAttack])
+		{
+			if(mActionStatus[MoveLeft])
+				mCharacter.SideLightAttack(-1.f);
+			else if (mActionStatus[MoveRight])
+				mCharacter.SideLightAttack(1.f);
+			else if(mActionStatus[Up])
+				mCharacter.UpLightAttack();
+			else if(mActionStatus[Guard])
+				mCharacter.DownLightAttack();
+			else
+				mCharacter.NeutralLightAttack();
+		}
+	}
+
 	mCharacter.update(dt);
 }
 
+// Draw the character the player is controlling
 void Player::draw(sf::RenderWindow& window) const
 {
 	mCharacter.draw(window);
 }
 
+// Handle events that are thrown at the player
+// Currently no events could happen to the player
 void Player::handleEvent(const sf::Event& event)
 {
 	if(event.type == sf::Event::KeyPressed)
@@ -33,26 +79,19 @@ void Player::handleEvent(const sf::Event& event)
 	}
 }
 
+// Handle input that is provided by the user
 void Player::handleRealtimeInput()
 {
 	for(auto pair : mKeyBinding)
 	{
 		if(sf::Keyboard::isKeyPressed(pair.first))
-		{
-			switch (pair.second)
-			{
-			case MoveLeft:
-				mCharacter.MoveLeft();
-				break;
-
-			case MoveRight:
-				mCharacter.MoveRight();
-				break;
-			}
-		}
+			mActionStatus[pair.second] = true;
+		else
+			mActionStatus[pair.second] = false;
 	}
 }
 
+// Assign the keys that the player will use to control the character
 void Player::assignKey(Action action, sf::Keyboard::Key key)
 {
 	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end(); )
@@ -93,14 +132,16 @@ void Player::setGrounded(bool value)
 sf::FloatRect Player::getGroundBox() const
 { return mCharacter.getGroundBox(); }
 
+// Checks if the action is an action that should be done in real time
+// Currently serves a miniscule purpose and will probably be removed
 bool Player::isRealtimeAction(Action action)
 {
 	switch (action)
 	{
-		case MoveLeft:
-		case MoveRight:
-			return true;
-		default:
-			return false;
+	case MoveLeft:
+	case MoveRight:
+		return true;
+	default:
+		return false;
 	}
 }

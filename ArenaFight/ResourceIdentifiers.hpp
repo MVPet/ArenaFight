@@ -1,3 +1,8 @@
+/*
+* ResourceIdentifiers.hpp
+* All of the potential resources we could pull and what there ID would be
+*/
+
 #ifndef _RESOURCEIDENTIFIERS
 #define _RESOURCEIDENTIFIERS
 
@@ -10,7 +15,11 @@ namespace sf
 namespace Textures
 {
 	enum ID
-	{ TitleScreen, Background, Platform, Ground, Stand, Run, Guard };
+	{ 
+		TitleScreen, Background, Platform, Ground, 
+		Stand, Run, Falling, Landing, 
+		Guard, NLight, SLight, ULight, DLight 
+	};
 }
 
 namespace Fonts

@@ -1,18 +1,20 @@
 #include "State.hpp"
 #include "StateStack.hpp"
 
-
+// Set up the context of our state
 State::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
 : window(&window)
 , textures(&textures)
 , fonts(&fonts)
 {}
 
+// Set up our state
 State::State(StateStack& stack, Context context)
 : mStack(&stack)
 , mContext(context)
 {}
 
+// Deconstructor
 State::~State()
 {}
 

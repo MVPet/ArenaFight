@@ -1,3 +1,9 @@
+/*
+* Battle.hpp
+* The class that runs the gameplay
+* Contains the stage and player objects
+*/
+
 #ifndef _BATTLE
 #define _BATTLE
 

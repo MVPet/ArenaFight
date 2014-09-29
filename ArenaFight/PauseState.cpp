@@ -6,7 +6,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
-
+// Set up our Pause State
 PauseState::PauseState(StateStack& stack, Context context)
 : State(stack, context)
 , mBackgroundSprite()
@@ -29,6 +29,7 @@ PauseState::PauseState(StateStack& stack, Context context)
 	mInstructionText.setPosition(0.5f * viewSize.x, 0.5f * viewSize.y);
 }
 
+// Draw everything in our Pause State, such as the text and "grey" screen
 void PauseState::draw()
 {
 	sf::RenderWindow& window = *getContext().window;
@@ -43,11 +44,14 @@ void PauseState::draw()
 	window.draw(mInstructionText);
 }
 
+// No need to update our pause state
+// But is kept here just in case we might need to
 bool PauseState::update(sf::Time)
 {
 	return false;
 }
 
+// Handles events that occur during our pause state
 bool PauseState::handleEvent(const sf::Event& event)
 {
 	if (event.type != sf::Event::KeyPressed)

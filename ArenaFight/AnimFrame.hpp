@@ -1,3 +1,9 @@
+/*
+* AnimFrame.hpp
+* Holds the data for a single frame of an animation
+* Data stored is the hurtbox, hitbox, and how long the frame should last
+*/
+
 #ifndef _ANIMFRAME
 #define _ANIMFRAME
 

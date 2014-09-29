@@ -3,7 +3,8 @@
 #include <stdexcept>
 #include <iostream>
 
-
+// Try to run the game
+// if we run into an error, spit it out
 int main()
 {
 	try

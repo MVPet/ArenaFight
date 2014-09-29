@@ -5,7 +5,9 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
-
+// Creates the main menu for the game
+// Guess it should be called MainMenuState, oops
+// Currently very bland and boring, needs some spice
 MenuState::MenuState(StateStack& stack, Context context)
 : State(stack, context)
 , mOptions()
@@ -16,7 +18,6 @@ MenuState::MenuState(StateStack& stack, Context context)
 
 	mBackgroundSprite.setTexture(texture);
 	
-	// A simple menu demonstration
 	sf::Text playOption;
 	playOption.setFont(font);
 	playOption.setString("Play");
@@ -34,6 +35,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	updateOptionText();
 }
 
+// Draw the background and text
 void MenuState::draw()
 {
 	sf::RenderWindow& window = *getContext().window;
@@ -45,14 +47,17 @@ void MenuState::draw()
 		window.draw(text);
 }
 
+// Main menu shouldn't have to update
+// kept in in case animated background is included
 bool MenuState::update(sf::Time)
 {
 	return true;
 }
 
+// Handle the events thrown at the menu
 bool MenuState::handleEvent(const sf::Event& event)
 {
-	// The demonstration menu logic
+	// Only button presses count
 	if (event.type != sf::Event::KeyPressed)
 		return false;
 
@@ -95,6 +100,7 @@ bool MenuState::handleEvent(const sf::Event& event)
 	return true;
 }
 
+// Update the option we're on
 void MenuState::updateOptionText()
 {
 	if (mOptions.empty())

@@ -1,5 +1,6 @@
 #include "AnimFrame.hpp"
 
+// Create the data on a frame that has both a hit and hurt box
 AnimFrame::AnimFrame(sf::IntRect hurtBox, sf::IntRect attackBox, float frameTime)
 	: mHurtBox(hurtBox)
 	, mHasAttackBox(true)
@@ -7,6 +8,7 @@ AnimFrame::AnimFrame(sf::IntRect hurtBox, sf::IntRect attackBox, float frameTime
 	, mFrameTime(frameTime)
 {}
 
+// Create the data on a frame that has only a hurt box
 AnimFrame::AnimFrame(sf::IntRect hurtBox, float frameTime)
 	: mHurtBox(hurtBox)
 	, mHasAttackBox(true)

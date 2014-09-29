@@ -1,6 +1,7 @@
 #include "StageDataTables.hpp"
 #include "Stage.hpp"
 
+// Initialize only the data for the state we want data for
 StageData initializeStageData(Stage::Type id)
 {
 	switch (id)
@@ -13,6 +14,7 @@ StageData initializeStageData(Stage::Type id)
 	}
 }
 
+// The data for the Training Stage
 StageData trainingData()
 {
 	StageData data;

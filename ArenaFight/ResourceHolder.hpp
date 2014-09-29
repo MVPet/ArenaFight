@@ -1,3 +1,8 @@
+/*
+* ResourceHolder.hpp
+* A dynamic container that holds desired resources in a map using  resource identifier pairs
+*/
+
 #ifndef _RESOURCEHOLDER
 #define _RESOURCEHOLDER
 

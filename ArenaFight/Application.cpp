@@ -7,9 +7,9 @@
 #include "MenuState.hpp"
 #include "PauseState.hpp"
 
-
 const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
 
+// Set up the game window and game
 Application::Application()
 : mWindow(sf::VideoMode(512, 256), "ArenaFight", sf::Style::Close)
 , mTextures()
@@ -32,6 +32,7 @@ Application::Application()
 	mStateStack.pushState(States::Title);
 }
 
+// Run the game cycle and update at 60fps
 void Application::run()
 {
 	sf::Clock clock;
@@ -48,7 +49,7 @@ void Application::run()
 			processInput();
 			update(TimePerFrame);
 
-			// Check inside this loop, because stack might be empty before update() call
+			// Stack might be empty before update() call
 			if (mStateStack.isEmpty())
 				mWindow.close();
 		}
@@ -58,6 +59,7 @@ void Application::run()
 	}
 }
 
+// Pass the input into whatever state we are currently in
 void Application::processInput()
 {
 	sf::Event event;
@@ -70,11 +72,13 @@ void Application::processInput()
 	}
 }
 
+// Update the state we are in
 void Application::update(sf::Time dt)
 {
 	mStateStack.update(dt);
 }
 
+// draw the current state
 void Application::render()
 {
 	mWindow.clear();
@@ -87,6 +91,7 @@ void Application::render()
 	mWindow.display();
 }
 
+// updates the stats that are displayed at the top left of screen
 void Application::updateStatistics(sf::Time dt)
 {
 	mStatisticsUpdateTime += dt;
@@ -100,6 +105,7 @@ void Application::updateStatistics(sf::Time dt)
 	}
 }
 
+// register the states that we will use in the game
 void Application::registerStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);

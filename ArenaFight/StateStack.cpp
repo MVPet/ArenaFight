@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-
+// Set up our stack
 StateStack::StateStack(State::Context context)
 : mStack()
 , mPendingList()
@@ -10,9 +10,10 @@ StateStack::StateStack(State::Context context)
 , mFactories()
 {}
 
+// Updtaes our stack top to bottom
 void StateStack::update(sf::Time dt)
 {
-	// Iterate from top to bottom, stop as soon as update() returns false
+	// Stop as soon as update() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 	{
 		if (!(*itr)->update(dt))
@@ -22,16 +23,17 @@ void StateStack::update(sf::Time dt)
 	applyPendingChanges();
 }
 
+// Draw all active states from bottom to top
 void StateStack::draw()
 {
-	// Draw all active states from bottom to top
 	for(State::Ptr& state : mStack)
 		state->draw();
 }
 
+// Handle events thrown at the stack from top to bottom
 void StateStack::handleEvent(const sf::Event& event)
 {
-	// Iterate from top to bottom, stop as soon as handleEvent() returns false
+	// Stop as soon as handleEvent() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 	{
 		if (!(*itr)->handleEvent(event))
@@ -53,6 +55,7 @@ void StateStack::clearStates()
 bool StateStack::isEmpty() const
 { return mStack.empty(); }
 
+// Create a state by calling the constructor that we assigned in our map
 State::Ptr StateStack::createState(States::ID stateID)
 {
 	auto found = mFactories.find(stateID);
@@ -61,6 +64,7 @@ State::Ptr StateStack::createState(States::ID stateID)
 	return found->second();
 }
 
+// Apply any pending changes we ahve to the stack
 void StateStack::applyPendingChanges()
 {
 	for(PendingChange change: mPendingList)
@@ -84,6 +88,7 @@ void StateStack::applyPendingChanges()
 	mPendingList.clear();
 }
 
+// Creates a change to the stack that needs to be applied
 StateStack::PendingChange::PendingChange(Action action, States::ID stateID)
 : action(action)
 , stateID(stateID)

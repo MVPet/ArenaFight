@@ -1,3 +1,8 @@
+/*
+* StateIdentifiers.hpp
+* An enum that we use to identify what are used
+*/
+
 #ifndef _STATEIDENTIFIERS
 #define _STATEIDENTIFIERS
 

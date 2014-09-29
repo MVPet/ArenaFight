@@ -1,4 +1,5 @@
 
+// Convert a value to a string
 template <typename T>
 std::string toString(const T& value)
 {

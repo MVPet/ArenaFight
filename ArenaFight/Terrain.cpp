@@ -5,6 +5,7 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
 
+// Set up our terrain
 Terrain::Terrain(Type id, sf::Vector2f position, sf::Texture* texture)
 	: mType(id)
 {
@@ -13,6 +14,7 @@ Terrain::Terrain(Type id, sf::Vector2f position, sf::Texture* texture)
 	centerOrigin(mSprite);
 	mSprite.setPosition(position);
 
+	// Depending on the type of terrain, the bounding box could be different
 	switch (mType)
 	{
 	case Platform:
@@ -30,9 +32,13 @@ Terrain::Terrain(Type id, sf::Vector2f position, sf::Texture* texture)
 	}
 }
 
+// Updates our terrain
+// Empty now, but will probably be used for moving terrain
 void Terrain::update(sf::Time dt)
 {}
 
+// draw the terrain
+// Commented out is drawing the bounding box for the terrain
 void Terrain::draw(sf::RenderWindow& window) const
 { 
 	window.draw(mSprite); 

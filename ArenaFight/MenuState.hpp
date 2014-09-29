@@ -1,3 +1,8 @@
+/*
+* MenuState.hpp
+* The main menu of the game
+*/
+
 #ifndef _MENUSTATE
 #define _MENUSTATE
 

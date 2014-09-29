@@ -1,3 +1,8 @@
+/*
+* Application.hpp
+* The Class that contains the entirety of the the game, such as the game window and main game loop
+*/
+
 #ifndef _APPLICATION
 #define _APPLICATION
 

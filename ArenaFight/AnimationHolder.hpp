@@ -1,3 +1,9 @@
+/*
+* AnimationHolder.hpp
+* An alternative to the ResourceHolder
+* Holds and stores only Animations
+*/
+
 #ifndef _ANIMATIONHOLDER
 #define _ANIMATIONHOLDER
 
@@ -13,7 +19,7 @@ class AnimationHolder
 {
 public:
 	void		add(sf::Texture* texture, Animation::Type type, std::vector<AnimFrame> frameData, bool loop);
-	Animation&	get(Animation::Type type, bool reset) const;
+	Animation&	get(Animation::Type type) const;
 
 private:
 	std::map<Animation::Type, Animation*> mAnimationMap;

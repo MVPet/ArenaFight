@@ -1,3 +1,9 @@
+/*
+* StageDataTables
+* Contains all the data needed for each of the stages
+* By having this, we do not need a class for each stage
+*/
+
 #ifndef _STAGEDATATABLE
 #define _STAGEDATATABLE
 

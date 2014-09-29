@@ -4,6 +4,7 @@
 
 #include <SFML\Graphics\RenderWindow.hpp>
 
+// Set up our stage
 Stage::Stage(Type id)
 	: mType(id)
 	, mTerrain()
@@ -13,9 +14,12 @@ Stage::Stage(Type id)
 	load(); 
 }
 
+// Updates the stage
+// Empty now, but will be used for moving terrain
 void Stage::update(sf::Time dt)
 {}
 
+// Load the terrain we need for the stage
 void Stage::load()
 {
 	StageData data = initializeStageData(mType);
@@ -43,6 +47,7 @@ void Stage::load()
 
 }
 
+// Draw all the terrain in the stage
 void Stage::draw(sf::RenderWindow& window) const
 {
 	window.draw(mBackground);
@@ -55,6 +60,8 @@ void Stage::draw(sf::RenderWindow& window) const
 std::vector<Terrain> Stage::getTerrain() const
 { return mTerrain; }
 
+// "Converts" the type of the stage into a string
+// Used for loading the Stage/Terrain textures
 std::string Stage::typeToString()
 {
 	switch (mType)

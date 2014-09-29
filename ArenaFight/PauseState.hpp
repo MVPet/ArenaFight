@@ -1,3 +1,8 @@
+/*
+* PauseState.hpp
+* The state the game is in when we pause it
+*/
+
 #ifndef _PAUSESTATE
 #define _PAUSESTATE
 

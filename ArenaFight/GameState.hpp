@@ -1,3 +1,10 @@
+/*
+* GameState.hpp
+* The gameplay portion of the game (aka the most important part)
+* Most of the gameplay logic is actually done inside the battle class, 
+* This class jsut handles the state itself
+*/
+
 #ifndef _GAMESTATE
 #define _GAMESTATE
 

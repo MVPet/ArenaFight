@@ -1,3 +1,8 @@
+/*
+* Utility.hpp
+* Contains an assortment of functions and classes that might be used anywhere in the program
+*/
+
 #ifndef _UTILITY
 #define _UTILITY
 
