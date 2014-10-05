@@ -37,6 +37,8 @@ public:
 
 	void				handleEvent(const sf::Event& event);
 	void				handleRealtimeInput();
+
+	void				takeDamage();
 		
 	void				assignKey(Action action, sf::Keyboard::Key key);
 	sf::Keyboard::Key	getAssignedKey(Action action) const;
@@ -50,9 +52,12 @@ public:
 	void				setGrounded(bool grounded);
 
 	sf::FloatRect		getGroundBox() const;
+	sf::IntRect		getAttackBox() const;
+	sf::IntRect		getBoundBox() const;
 
 private:	
 	static bool	isRealtimeAction(Action action);
+	void		setUpControls();
 
 private:
 	int												mPlayerNo;

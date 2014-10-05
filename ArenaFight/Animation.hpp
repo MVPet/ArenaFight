@@ -33,6 +33,9 @@ public:
 
 	void			setScale(float x, float y);
 
+	sf::IntRect	getAttackBox() const;
+	sf::IntRect	getBoundBox() const;
+
 private:
 	Type					mType;
 	sf::Texture*			mTexture;

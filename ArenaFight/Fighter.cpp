@@ -134,6 +134,12 @@ void Fighter::setState(Fighter::State state)
 Fighter::State Fighter::getState() const
 { return mState; }
 
+sf::IntRect Fighter::getAttackBox() const
+{ return mCurrentAnim.getAttackBox(); }
+
+sf::IntRect Fighter::getBoundBox() const
+{ return mCurrentAnim.getBoundBox(); }
+
 // Change the fighter's current animation
 // If animation doesn't chnage then we shouldn't keep assigning it
 void Fighter::changeAnimation(Animation::Type type)

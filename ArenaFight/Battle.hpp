@@ -40,7 +40,7 @@ private:
 	sf::Vector2f		mSpawnPosition;
 
 	Stage				mStage;
-	Player				mPlayer;
+	Player*				mPlayers [4];
 };
 
 #endif // Battle.hpp

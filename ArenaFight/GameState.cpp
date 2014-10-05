@@ -8,6 +8,7 @@ GameState::GameState(StateStack& stack, Context context)
 {
 	// Temporary until I create character and stage select
 	selectedFighters[0] = Fighter::Kenshiro;
+	selectedFighters[1] = Fighter::Kenshiro;
 	selectedStage = Stage::Training;
 }
 

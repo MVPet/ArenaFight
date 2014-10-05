@@ -8,18 +8,7 @@ Player::Player(int playerNo, sf::Vector2f position)
 	: mPlayerNo(playerNo)
 	, mCharacter(selectedFighters[mPlayerNo], position)
 {
-	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
-	mKeyBinding[sf::Keyboard::Right] = MoveRight;
-	mKeyBinding[sf::Keyboard::Up] = Up;
-	mKeyBinding[sf::Keyboard::Down] = Guard;
-	mKeyBinding[sf::Keyboard::A] = LightAttack;
-
-
-	mActionStatus[MoveLeft] = false;
-	mActionStatus[MoveRight] = false;
-	mActionStatus[Guard] = false;
-	mActionStatus[Up] = false;
-	mActionStatus[LightAttack] = false;
+	setUpControls();
 }
 
 // Update the player
@@ -91,6 +80,9 @@ void Player::handleRealtimeInput()
 	}
 }
 
+void Player::takeDamage()
+{}
+
 // Assign the keys that the player will use to control the character
 void Player::assignKey(Action action, sf::Keyboard::Key key)
 {
@@ -132,6 +124,12 @@ void Player::setGrounded(bool value)
 sf::FloatRect Player::getGroundBox() const
 { return mCharacter.getGroundBox(); }
 
+sf::IntRect Player::getAttackBox() const
+{ return mCharacter.getAttackBox(); }
+
+sf::IntRect Player::getBoundBox() const
+{ return mCharacter.getBoundBox(); }
+
 // Checks if the action is an action that should be done in real time
 // Currently serves a miniscule purpose and will probably be removed
 bool Player::isRealtimeAction(Action action)
@@ -144,4 +142,31 @@ bool Player::isRealtimeAction(Action action)
 	default:
 		return false;
 	}
+}
+
+void Player::setUpControls()
+{
+	switch(mPlayerNo)
+	{
+	case 0:
+		mKeyBinding[sf::Keyboard::Left] = MoveLeft;
+		mKeyBinding[sf::Keyboard::Right] = MoveRight;
+		mKeyBinding[sf::Keyboard::Up] = Up;
+		mKeyBinding[sf::Keyboard::Down] = Guard;
+		mKeyBinding[sf::Keyboard::A] = LightAttack;
+		break;
+	case 1:
+		mKeyBinding[sf::Keyboard::J] = MoveLeft;
+		mKeyBinding[sf::Keyboard::L] = MoveRight;
+		mKeyBinding[sf::Keyboard::I] = Up;
+		mKeyBinding[sf::Keyboard::K] = Guard;
+		mKeyBinding[sf::Keyboard::T] = LightAttack;
+		break;
+	}
+
+	mActionStatus[MoveLeft] = false;
+	mActionStatus[MoveRight] = false;
+	mActionStatus[Guard] = false;
+	mActionStatus[Up] = false;
+	mActionStatus[LightAttack] = false;
 }

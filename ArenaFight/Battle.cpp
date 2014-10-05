@@ -7,9 +7,11 @@
 // Set everything up
 Battle::Battle(sf::RenderWindow& window)
 	: mWindow(window)
-	, mPlayer(0, sf::Vector2f(300, 100))
 	, mStage(selectedStage)
 {
+	mPlayers[0] = new Player(0, sf::Vector2f(300, 100));
+	mPlayers[1] = new Player(1, sf::Vector2f(400, 200));
+
 	mWorldView = mWindow.getDefaultView();
 	mWorldBounds = mWindow.getDefaultView().getSize();
 }
@@ -21,22 +23,37 @@ void Battle::update(sf::Time dt)
 
 	checkCollisions(dt);
 
-	mPlayer.update(dt);
-	mPlayer.handleRealtimeInput();
+	for(int i = 0; i < 2; i++)
+	{
+		if(mPlayers[i] != NULL)
+		{
+			mPlayers[i]->update(dt);
+			mPlayers[i]->handleRealtimeInput();
+		}
+	}
 }
 
 // Handle events that occur in the battle
 // Pass them to everything that could be affected byt he event
 void Battle::handleEvent(sf::Event event)
 {
-	mPlayer.handleEvent(event);
+	for(int i = 0; i < 2; i++)
+	{
+		if(mPlayers[i] != NULL)
+		{
+			mPlayers[i]->handleEvent(event);
+		}
+	}
 }
 
 // Draw everything in the battle
 void Battle::draw()
 {
 	mStage.draw(mWindow);
-	mPlayer.draw(mWindow);
+
+	for(int i = 0; i < 2; i++)
+		if(mPlayers[i] != NULL)
+			mPlayers[i]->draw(mWindow);
 }
 
 // Checks collisions within the battle
@@ -46,16 +63,32 @@ void Battle::checkCollisions(sf::Time dt)
 {
 	bool colided = false;
 
-	for (Terrain t : mStage.getTerrain())
+	// Stage against Players
+	for(int i = 0; i < 2; i++)
 	{
-		if(t.getBoundBox().intersects(mPlayer.getGroundBox()))
+		colided = false;
+
+		if(mPlayers[i] != NULL)
 		{
-			mPlayer.setGrounded(true);
-			colided = true;
+			for (Terrain t : mStage.getTerrain())
+			{
+				if(t.getBoundBox().intersects(mPlayers[i]->getGroundBox()))
+				{
+					mPlayers[i]->setGrounded(true);
+					colided = true;
+				}
+			}
+
+			if(!colided)
+				mPlayers[i]->setGrounded(false);
 		}
 	}
 
-	if(!colided)
-		mPlayer.setGrounded(false);
+	// Player against Player
+	for (int i = 0; i < 1; i++)
+		if(mPlayers[i] != NULL)
+			for (int j = 1; j < 2; j++)
+				if(mPlayers[i]->getAttackBox().intersects(mPlayers[j]->getBoundBox()))
+					mPlayers[j]->takeDamage();
 }
 

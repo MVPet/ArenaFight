@@ -18,3 +18,9 @@ AnimFrame::AnimFrame(sf::IntRect hurtBox, float frameTime)
 
 float AnimFrame::getFrameTime()
 { return mFrameTime; }
+
+sf::IntRect AnimFrame::getAttackBox() const
+{ return mAttackBox; }
+
+sf::IntRect AnimFrame::getBoundBox() const
+{ return mHurtBox; }

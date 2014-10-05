@@ -56,6 +56,9 @@ public:
 
 	sf::FloatRect		getGroundBox() const;
 
+	sf::IntRect			getAttackBox() const;
+	sf::IntRect			getBoundBox() const;
+
 	void				MoveLeft();
 	void				MoveRight();
 	void				Guard();

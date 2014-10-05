@@ -67,3 +67,9 @@ bool Animation::getIsDone() const
 
 void Animation::setScale(float x, float y)
 { mSprite.setScale(x, y); }
+
+sf::IntRect Animation::getAttackBox() const
+{ return mFrameData[mFrameIndex].getAttackBox(); }
+
+sf::IntRect Animation::getBoundBox() const
+{ return mFrameData[mFrameIndex].getBoundBox(); }

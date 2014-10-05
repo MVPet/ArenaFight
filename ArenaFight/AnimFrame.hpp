@@ -17,6 +17,9 @@ public:
 
 	float	getFrameTime();
 
+	sf::IntRect getAttackBox() const;
+	sf::IntRect getBoundBox() const;
+
 private:
 	float		mFrameTime;
 	bool		mHasAttackBox;
