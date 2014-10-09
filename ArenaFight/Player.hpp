@@ -38,7 +38,7 @@ public:
 	void				handleEvent(const sf::Event& event);
 	void				handleRealtimeInput();
 
-	void				takeDamage();
+	void				takeDamage(int amount, float hitStun, float xKnockBack, float yKnockBack);
 		
 	void				assignKey(Action action, sf::Keyboard::Key key);
 	sf::Keyboard::Key	getAssignedKey(Action action) const;
@@ -52,8 +52,16 @@ public:
 	void				setGrounded(bool grounded);
 
 	sf::FloatRect		getGroundBox() const;
-	sf::IntRect		getAttackBox() const;
-	sf::IntRect		getBoundBox() const;
+	sf::IntRect			getAttackBox() const;
+	sf::IntRect			getBoundBox() const;
+
+	int					getDamage() const;
+	int					getNumOfHits() const;
+	float				getHitStun() const;
+	sf::Vector2f		getKnockBack() const;
+
+	void				addHit();
+	int					getTotalHits() const;
 
 private:	
 	static bool	isRealtimeAction(Action action);

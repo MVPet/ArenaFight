@@ -4,10 +4,13 @@
 
 #include <SFML\Graphics\RenderWindow.hpp>
 
+#include <iostream>
+
 // Set everything up
 Battle::Battle(sf::RenderWindow& window)
 	: mWindow(window)
 	, mStage(selectedStage)
+	, mFramesBetweenHit(0)
 {
 	mPlayers[0] = new Player(0, sf::Vector2f(300, 100));
 	mPlayers[1] = new Player(1, sf::Vector2f(400, 200));
@@ -84,11 +87,39 @@ void Battle::checkCollisions(sf::Time dt)
 		}
 	}
 
-	// Player against Player
+	/*// Player against Player
 	for (int i = 0; i < 1; i++)
-		if(mPlayers[i] != NULL)
-			for (int j = 1; j < 2; j++)
-				if(mPlayers[i]->getAttackBox().intersects(mPlayers[j]->getBoundBox()))
-					mPlayers[j]->takeDamage();
+	if(mPlayers[i] != NULL)
+	for (int j = 1; j < 2; j++)
+	if(mPlayers[i]->getAttackBox().intersects(mPlayers[j]->getBoundBox()))
+	mPlayers[j]->takeDamage();*/
+
+
+	//Quick and dirty way of checking for attack collision
+	if(mPlayers[0]->getAttackBox().intersects(mPlayers[1]->getBoundBox()))
+	{
+		if(mPlayers[0]->getTotalHits() < mPlayers[0]->getNumOfHits())
+		{
+			std::cout << mPlayers[0]->getTotalHits() << "," << mPlayers[0]->getNumOfHits() << std::endl;
+			mFramesBetweenHit = 0;
+			mPlayers[0]->addHit();
+
+			sf::Vector2f knockBack = mPlayers[0]->getKnockBack();
+			mPlayers[1]->takeDamage(mPlayers[0]->getDamage(), mPlayers[0]->getHitStun(), knockBack.x, knockBack.y);
+		}
+	}
+
+	if(mPlayers[1]->getAttackBox().intersects(mPlayers[0]->getBoundBox()))
+	{
+		if(mPlayers[1]->getTotalHits() < mPlayers[1]->getNumOfHits())
+		{
+			std::cout << mPlayers[0]->getTotalHits() << "," << mPlayers[1]->getNumOfHits() << std::endl;
+			mFramesBetweenHit = 0;
+			mPlayers[1]->addHit();
+
+			sf::Vector2f knockBack = mPlayers[1]->getKnockBack();
+			mPlayers[0]->takeDamage(mPlayers[1]->getDamage(), mPlayers[1]->getHitStun(), knockBack.x, knockBack.y);
+		}
+	}
 }
 

@@ -26,7 +26,7 @@ Animation::Animation(sf::Texture* texture, Type type, std::vector<AnimFrame> fra
 	mSprite.setOrigin(0, mFrameHeight);
 }
 
-void Animation::update(sf::Time deltaTime, sf::Vector2f position, float xScale)
+void Animation::update(sf::Time deltaTime, sf::Vector2f position)
 {
 	mUpdateTime += deltaTime.asSeconds();
 
@@ -50,11 +50,29 @@ void Animation::update(sf::Time deltaTime, sf::Vector2f position, float xScale)
 	}
 
 	mSprite.setPosition(position);
-	mSprite.setScale(xScale, 1.f);
+
+	mFrameData[mFrameIndex].setBoundBoxPosition(position.y - mSprite.getTextureRect().height, position.x);
+	mFrameData[mFrameIndex].setAttackBoxPosition(position.y - mSprite.getTextureRect().height, position.x);
 }
 
 void Animation::draw(sf::RenderWindow& window) const
-{ window.draw(mSprite); }
+{ 
+	window.draw(mSprite);
+
+	/*sf::RectangleShape rectangle;
+	rectangle.setFillColor(sf::Color::Black);
+	rectangle.setPosition(mFrameData[mFrameIndex].getBoundBox().left, mFrameData[mFrameIndex].getBoundBox().top);
+	rectangle.setSize(sf::Vector2f(mFrameData[mFrameIndex].getBoundBox().width, mFrameData[mFrameIndex].getBoundBox().height));
+
+	window.draw(rectangle);
+
+	sf::RectangleShape Arectangle;
+	Arectangle.setFillColor(sf::Color::Blue);
+	Arectangle.setPosition(mFrameData[mFrameIndex].getAttackBox().left, mFrameData[mFrameIndex].getAttackBox().top);
+	Arectangle.setSize(sf::Vector2f(mFrameData[mFrameIndex].getAttackBox().width, mFrameData[mFrameIndex].getAttackBox().height));
+
+	window.draw(Arectangle);*/
+}
 
 Animation::Type Animation::getType() const
 { return mType; }
@@ -73,3 +91,18 @@ sf::IntRect Animation::getAttackBox() const
 
 sf::IntRect Animation::getBoundBox() const
 { return mFrameData[mFrameIndex].getBoundBox(); }
+
+void Animation::setFrameDuration(int frameIndex, float duration)
+{ mFrameData[frameIndex].setFrameTime(duration); }
+
+int Animation::getDamage() const
+{ return mFrameData[mFrameIndex].getDamage(); }
+
+int Animation::getNumOfHits() const
+{ return mFrameData[mFrameIndex].getNumOfHits(); }
+
+float Animation::getHitStun() const
+{ return mFrameData[mFrameIndex].getHitStun(); }
+
+sf::Vector2f Animation::getKnockBack() const
+{ return mFrameData[mFrameIndex].getKnockBack(); }

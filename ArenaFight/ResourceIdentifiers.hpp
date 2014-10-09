@@ -17,8 +17,8 @@ namespace Textures
 	enum ID
 	{ 
 		TitleScreen, Background, Platform, Ground, 
-		Stand, Run, Falling, Landing, 
-		Guard, NLight, SLight, ULight, DLight 
+		Stand, LStand, Run, LRun, Falling, LFalling, Landing, LLanding, Hurt, LHurt,
+		Guard, LGuard, NLight, LNLight, DLight, LDLight, SLight, LSLight, ULight, LULight
 	};
 }
 

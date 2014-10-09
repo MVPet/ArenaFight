@@ -30,6 +30,9 @@ struct CharData
 	std::vector<AnimFrame> landingData;
 	sf::Vector2f landingOrigin;
 
+	std::vector<AnimFrame> hurtData;
+	sf::Vector2f hurtOrigin;
+
 	std::vector<AnimFrame> guardData;
 	sf::Vector2f guardOrigin;
 
@@ -44,6 +47,37 @@ struct CharData
 
 	std::vector<AnimFrame> dLightData;
 	sf::Vector2f dLightOrigin;
+
+	//Left facing data---------------------------------------------------------------------------------------------
+	std::vector<AnimFrame> LstandData;
+	sf::Vector2f LstandOrigin;
+
+	std::vector<AnimFrame> LrunData;
+	sf::Vector2f LrunOrigin;
+
+	std::vector<AnimFrame> LfallData;
+	sf::Vector2f LfallOrigin;
+
+	std::vector<AnimFrame> LlandingData;
+	sf::Vector2f LlandingOrigin;
+
+	std::vector<AnimFrame> LhurtData;
+	sf::Vector2f LhurtOrigin;
+
+	std::vector<AnimFrame> LguardData;
+	sf::Vector2f LguardOrigin;
+
+	std::vector<AnimFrame> LnLightData;
+	sf::Vector2f LnLightOrigin;
+
+	std::vector<AnimFrame> LsLightData;
+	sf::Vector2f LsLightOrigin;
+
+	std::vector<AnimFrame> LuLightData;
+	sf::Vector2f LuLightOrigin;
+
+	std::vector<AnimFrame> LdLightData;
+	sf::Vector2f LdLightOrigin;
 };
 
 CharData	initializeCharData(Fighter::Type);

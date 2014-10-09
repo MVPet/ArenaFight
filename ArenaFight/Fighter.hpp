@@ -35,16 +35,16 @@ public:
 
 	enum State
 	{ 
-		None, Guarding, Hit, Attacking, Lag,
+		None, Guarding, Hurt, Attacking, Lag,
 		StateCount 
 	};
 
 public:
-					Fighter(Type type, sf::Vector2f position);
+						Fighter(Type type, sf::Vector2f position);
 
-	void			update(sf::Time dt);
-	void			load();
-	void			draw(sf::RenderWindow& window) const;
+	void				update(sf::Time dt);
+	void				load();
+	void				draw(sf::RenderWindow& window) const;
 
 	void				setVelocity(float x, float y);
 	sf::Vector2f		getVelocity() const;
@@ -59,6 +59,19 @@ public:
 	sf::IntRect			getAttackBox() const;
 	sf::IntRect			getBoundBox() const;
 
+	int					getDamage() const;
+	int					getNumOfHits() const;
+	float				getHitStun() const;
+	sf::Vector2f		getKnockBack() const;
+
+	void				addHit();
+	int					getTotalHits() const;
+
+
+	void				changeAnimation(Animation::Type type);
+
+	void				takeDamage(int amount, float hitStun, float xKnockBack, float yKnockBack);
+
 	void				MoveLeft();
 	void				MoveRight();
 	void				Guard();
@@ -69,10 +82,16 @@ public:
 	void				DownLightAttack();
 
 private:
-	void		changeAnimation(Animation::Type type);
-	std::string typeToString();
+	void			directionUpdate();
+	std::string		typeToString();
+	Animation::Type	getLeftAnimEnum(Animation::Type type);
+	Animation::Type getRightAnimEnum(Animation::Type type);
 
 private:
+	int				mHealth;
+	int				mWeight;
+	int				mTotalHits;
+
 	bool			mGrounded;
 	float			mFlip;
 

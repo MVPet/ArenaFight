@@ -33,6 +33,9 @@ private:
 	void	checkCollisions(sf::Time dt);
 
 private:
+
+	float				mFramesBetweenHit;
+
 	sf::RenderWindow&	mWindow;
 	sf::View			mWorldView;
 

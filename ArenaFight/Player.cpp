@@ -12,10 +12,10 @@ Player::Player(int playerNo, sf::Vector2f position)
 }
 
 // Update the player
-// Takes into account the input provided byt he user and the state the user's character is in.
+// Takes into account the input provided by the user and the state the user's character is in.
 void Player::update(sf::Time dt)
 {
-	if(mCharacter.getState() != Fighter::Lag && mCharacter.getState() != Fighter::Attacking)
+	if(mCharacter.getState() != Fighter::Hurt && mCharacter.getState() != Fighter::Lag && mCharacter.getState() != Fighter::Attacking)
 	{
 		if(mActionStatus[MoveLeft])
 			mCharacter.MoveLeft();
@@ -80,8 +80,8 @@ void Player::handleRealtimeInput()
 	}
 }
 
-void Player::takeDamage()
-{}
+void Player::takeDamage(int amount, float hitStun, float xKnockBack, float yKnockBack)
+{ mCharacter.takeDamage(amount, hitStun, xKnockBack, yKnockBack); }
 
 // Assign the keys that the player will use to control the character
 void Player::assignKey(Action action, sf::Keyboard::Key key)
@@ -129,6 +129,24 @@ sf::IntRect Player::getAttackBox() const
 
 sf::IntRect Player::getBoundBox() const
 { return mCharacter.getBoundBox(); }
+
+int Player::getDamage() const
+{ return mCharacter.getDamage(); }
+
+int Player::getNumOfHits() const
+{ return mCharacter.getNumOfHits(); }
+
+float Player::getHitStun() const
+{ return mCharacter.getHitStun(); }
+
+sf::Vector2f Player::getKnockBack() const
+{ return mCharacter.getKnockBack(); }
+
+void Player::addHit() 
+{ mCharacter.addHit(); }
+
+int Player::getTotalHits() const
+{ return mCharacter.getTotalHits(); }
 
 // Checks if the action is an action that should be done in real time
 // Currently serves a miniscule purpose and will probably be removed
