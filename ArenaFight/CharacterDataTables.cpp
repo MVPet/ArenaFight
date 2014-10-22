@@ -126,9 +126,9 @@ CharData kenshiroData()
 	data.uLightData.push_back(AnimFrame(sf::IntRect(7,11,19,58), .1f));
 	data.uLightData.push_back(AnimFrame(sf::IntRect(7,11,19,58), .1f));
 	data.uLightData.push_back(AnimFrame(sf::IntRect(7,11,19,58), .1f));
-	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(32,3,25,59),.1f, 7, 0, 1, 0, 10));
-	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(31,0,26,34),.1f, 7, 0, 1, 0, 10));
-	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(32,0,16,19),.1f, 7, 0, 1, 0, 10));
+	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(32,3,25,59),.1f, 7, 0, 1, 0, 300));
+	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(31,0,26,34),.1f, 7, 0, 1, 0, 300));
+	data.uLightData.push_back(AnimFrame(sf::IntRect(5,9,24,60), sf::IntRect(32,0,16,19),.1f, 7, 0, 1, 0, 300));
 	data.uLightData.push_back(AnimFrame(sf::IntRect(7,11,19,58), .1f));
 	data.uLightData.push_back(AnimFrame(sf::IntRect(7,11,19,58), .1f));
 
@@ -136,9 +136,9 @@ CharData kenshiroData()
 	data.LuLightData.push_back(AnimFrame(sf::IntRect(31,11,19,58), .1f));
 	data.LuLightData.push_back(AnimFrame(sf::IntRect(31,11,19,58), .1f));
 	data.LuLightData.push_back(AnimFrame(sf::IntRect(31,11,19,58), .1f));
-	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(0,3,25,59),.1f, 7, 0, 1, 0, 10));
-	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(0,0,26,34),.1f, 7, 0, 1, 0, 10));
-	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(9,0,16,19),.1f, 7, 0, 1, 0, 10));
+	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(0,3,25,59),.1f, 7, 0, 1, 0, 300));
+	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(0,0,26,34),.1f, 7, 0, 1, 0, 300));
+	data.LuLightData.push_back(AnimFrame(sf::IntRect(28,9,24,60), sf::IntRect(9,0,16,19),.1f, 7, 0, 1, 0, 300));
 	data.LuLightData.push_back(AnimFrame(sf::IntRect(31,11,19,58), .1f));
 	data.LuLightData.push_back(AnimFrame(sf::IntRect(31,11,19,58), .1f));
 

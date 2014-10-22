@@ -107,7 +107,11 @@ void Fighter::update(sf::Time dt)
 		mVelocity.x = mVelocity.x * -mFlip - .1f;
 	else
 	{
-		mVelocity.y = 80.f;
+		std::cout << mVelocity.y << std::endl;
+
+		if(mVelocity.y < 80.f)
+			mVelocity.y += 10.f;
+			
 		changeAnimation(Animation::Falling);
 	}
 
@@ -221,14 +225,24 @@ void Fighter::changeAnimation(Animation::Type type)
 			mCurrentAnim = mAnimations.get(type);
 }
 
+// The player took damage
+// Let's see how much, how long the hitstun is, and how much knockback we're taking
 void Fighter::takeDamage(int amount, float hitStun, float xKnockBack, float yKnockBack)
 {
 	mHealth -= amount;
 	mVelocity.x = xKnockBack;
+	mVelocity.y = -yKnockBack;
+	if(yKnockBack != 0 && mGrounded)
+	{
+		setPosition(getPosition().x, getPosition().y - 10.f);
+		mGrounded = false;
+	}
+
 	mState = Hurt;
 	changeAnimation(Animation::Hurt);
 	mCurrentAnim.setFrameDuration(0, hitStun);
 	std::cout << mHealth << std::endl;
+	std::cout << mVelocity.y << std::endl;
 }
 
 // "Convert" our fighter's type to a string
@@ -247,15 +261,21 @@ std::string Fighter::typeToString()
 void Fighter::MoveLeft()
 { 
 	mFlip = -1.f;
-
 	mVelocity.x = -50.f; 
 }
 
 void Fighter::MoveRight()
 { 
 	mFlip = 1.f;
-
 	mVelocity.x = 50.f; 
+}
+
+void Fighter::Jump()
+{
+	mVelocity.y = -300.f;
+	if(mGrounded)
+		setPosition(getPosition().x, getPosition().y - 10.f);
+	mGrounded = false;
 }
 
 void Fighter::Guard()

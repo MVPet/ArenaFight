@@ -7,6 +7,8 @@
 Player::Player(int playerNo, sf::Vector2f position)
 	: mPlayerNo(playerNo)
 	, mCharacter(selectedFighters[mPlayerNo], position)
+	, mJumpHeld(false)
+	, mNumberOfJumps(0)
 {
 	setUpControls();
 }
@@ -22,7 +24,14 @@ void Player::update(sf::Time dt)
 		else if (mActionStatus[MoveRight])
 			mCharacter.MoveRight();
 		else
-			mCharacter.setVelocity(0.f,0.f);
+			mCharacter.setVelocity(0.f, mCharacter.getVelocity().y);
+
+		if(!mJumpHeld && mNumberOfJumps < 2 && mActionStatus[Jump])
+		{
+			mJumpHeld = true;
+			mNumberOfJumps++;
+			mCharacter.Jump();
+		}
 
 		if(mActionStatus[Guard])
 		{
@@ -74,9 +83,15 @@ void Player::handleRealtimeInput()
 	for(auto pair : mKeyBinding)
 	{
 		if(sf::Keyboard::isKeyPressed(pair.first))
+		{
 			mActionStatus[pair.second] = true;
+		}
 		else
+		{
 			mActionStatus[pair.second] = false;
+			if(pair.second == Jump)
+				mJumpHeld = false;
+		}
 	}
 }
 
@@ -119,7 +134,14 @@ sf::Vector2f Player::getVelocity() const
 { return mCharacter.getVelocity(); }
 
 void Player::setGrounded(bool value)
-{ mCharacter.setGrounded(value); }
+{ 
+	if(value)
+		mNumberOfJumps = 0;
+	mCharacter.setGrounded(value); 
+}
+
+Fighter::State Player::getState() const
+{ return mCharacter.getState(); }
 
 sf::FloatRect Player::getGroundBox() const
 { return mCharacter.getGroundBox(); }
@@ -171,6 +193,7 @@ void Player::setUpControls()
 		mKeyBinding[sf::Keyboard::Right] = MoveRight;
 		mKeyBinding[sf::Keyboard::Up] = Up;
 		mKeyBinding[sf::Keyboard::Down] = Guard;
+		mKeyBinding[sf::Keyboard::Space] = Jump;
 		mKeyBinding[sf::Keyboard::A] = LightAttack;
 		break;
 	case 1:
@@ -178,6 +201,7 @@ void Player::setUpControls()
 		mKeyBinding[sf::Keyboard::L] = MoveRight;
 		mKeyBinding[sf::Keyboard::I] = Up;
 		mKeyBinding[sf::Keyboard::K] = Guard;
+		mKeyBinding[sf::Keyboard::U] = Jump;
 		mKeyBinding[sf::Keyboard::T] = LightAttack;
 		break;
 	}
@@ -186,5 +210,6 @@ void Player::setUpControls()
 	mActionStatus[MoveRight] = false;
 	mActionStatus[Guard] = false;
 	mActionStatus[Up] = false;
+	mActionStatus[Jump] = false;
 	mActionStatus[LightAttack] = false;
 }

@@ -74,6 +74,7 @@ public:
 
 	void				MoveLeft();
 	void				MoveRight();
+	void				Jump();
 	void				Guard();
 
 	void				NeutralLightAttack();

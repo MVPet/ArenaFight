@@ -51,6 +51,8 @@ public:
 
 	void				setGrounded(bool grounded);
 
+	Fighter::State		getState() const;
+
 	sf::FloatRect		getGroundBox() const;
 	sf::IntRect			getAttackBox() const;
 	sf::IntRect			getBoundBox() const;
@@ -69,6 +71,8 @@ private:
 
 private:
 	int												mPlayerNo;
+	bool											mJumpHeld;
+	int												mNumberOfJumps;
 
 	Fighter											mCharacter;
 	sf::Vector2f									mPosition;
